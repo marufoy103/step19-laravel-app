@@ -52,6 +52,21 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+
+# php MyAdminを使用するため項目を追加
+    phpmyadmin:
+        image: 'phpmyadmin/phpmyadmin:latest'
+        links:
+            - mysql
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: mysql
+            MYSQL_USERNAME: '${DB_USERNAME}'
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        networks:
+            - sail
+
     redis:
         image: 'redis:alpine'
         ports:
