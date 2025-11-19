@@ -1,59 +1,186 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel シンプルブログアプリケーション
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Laravel Sailを使用したシンプルなブログアプリケーションです。
 
-## About Laravel
+## 機能一覧
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 認証機能
+- **Laravel Breeze**による認証システム
+  - ユーザー登録
+  - ログイン・ログアウト
+  - パスワードリセット
+  - メール認証（オプション）
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### ブログ機能
+- **記事の閲覧**: 公開された記事の一覧表示と詳細表示
+- **記事の投稿**: 認証済みユーザーによる新規記事の作成
+- **記事の編集**: 作成者による記事の更新
+- **記事の削除**: 作成者による記事の削除
+- **ページネーション**: 記事一覧のページ分割表示
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 追加機能
+- **PHPによるアレンジ**: カスタム機能の実装
+- **JavaScriptによるアレンジ**: フロントエンドでの動的機能
 
-## Learning Laravel
+## 必要な環境
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Docker Desktop
+- Git
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## セットアップ手順
 
-## Laravel Sponsors
+### 1. リポジトリのクローン
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone <repository-url>
+cd step19-laravel-app
+```
 
-### Premium Partners
+### 2. 環境変数の設定
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+cp .env.example .env
+```
 
-## Contributing
+`.env`ファイルを開き、必要に応じてデータベース設定などを変更してください。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Laravel Sailの起動
 
-## Code of Conduct
+初回起動時は、まずComposerの依存関係をインストールします：
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+その後、Sailを起動します：
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+./vendor/bin/sail up -d
+```
 
-## License
+または、Composerがインストールされていない場合は：
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+docker compose up -d
+```
+
+### 4. アプリケーションキーの生成
+
+```bash
+./vendor/bin/sail artisan key:generate
+```
+
+### 5. データベースマイグレーション
+
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+### 6. フロントエンドのビルド（開発環境）
+
+```bash
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+```
+
+### 7. アプリケーションへのアクセス
+
+ブラウザで以下のURLにアクセスしてください：
+
+```
+http://localhost
+```
+
+## 使用方法
+
+### ユーザー登録・ログイン
+
+1. トップページから「Register」をクリックしてユーザー登録を行います
+2. 登録後、自動的にログインされます
+3. 既存ユーザーは「Login」からログインできます
+
+### 記事の作成
+
+1. ログイン後、「新規投稿」ボタンをクリック
+2. タイトルと本文を入力して投稿
+
+### 記事の編集・削除
+
+1. 自分の投稿した記事の詳細ページから「編集」または「削除」ボタンをクリック
+2. 編集の場合は内容を変更して保存
+3. 削除の場合は確認後に削除されます
+
+## 開発コマンド
+
+### Laravel Sailコマンド
+
+```bash
+# コンテナの起動
+./vendor/bin/sail up -d
+
+# コンテナの停止
+./vendor/bin/sail down
+
+# Artisanコマンドの実行
+./vendor/bin/sail artisan <command>
+
+# Composerコマンドの実行
+./vendor/bin/sail composer <command>
+
+# NPMコマンドの実行
+./vendor/bin/sail npm <command>
+```
+
+### よく使うコマンド
+
+```bash
+# マイグレーション実行
+./vendor/bin/sail artisan migrate
+
+# マイグレーションロールバック
+./vendor/bin/sail artisan migrate:rollback
+
+# シーダーの実行
+./vendor/bin/sail artisan db:seed
+
+# キャッシュクリア
+./vendor/bin/sail artisan cache:clear
+./vendor/bin/sail artisan config:clear
+./vendor/bin/sail artisan view:clear
+```
+
+## 技術スタック
+
+- **フレームワーク**: Laravel 12.x
+- **認証**: Laravel Breeze
+- **フロントエンド**:
+  - Vite
+  - Tailwind CSS
+- **データベース**: MySQL（Docker経由）
+- **開発環境**: Laravel Sail (Docker)
+
+## プロジェクト構造
+
+```
+step19-laravel-app/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/    # コントローラー
+│   └── Models/             # Eloquentモデル
+├── database/
+│   ├── migrations/         # データベースマイグレーション
+│   └── seeders/            # シーダー
+├── resources/
+│   ├── views/              # Bladeテンプレート
+│   └── js/                 # JavaScriptファイル
+├── routes/
+│   └── web.php             # Webルート定義
+└── tests/                  # テストファイル
+```
+
+## 参考リンク
+
+- [Laravel公式ドキュメント](https://laravel.com/docs)
+- [Laravel Breeze](https://laravel.com/docs/breeze)
+- [Laravel Sail](https://laravel.com/docs/sail)
+```
