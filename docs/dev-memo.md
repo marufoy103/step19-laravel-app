@@ -16,3 +16,11 @@
 記事の編集画面	GET	/admin/post/edit
 記事の編集（更新）	POST	/admin/post/edit
 記事の削除	GET	/admin/post/delete_one
+
+##　制約
+ログインユーザーのみ
+ -記事の新規投稿画面
+ -記事の新規投稿
+ -記事の編集画面
+ -記事の更新
+ -記事の削除
