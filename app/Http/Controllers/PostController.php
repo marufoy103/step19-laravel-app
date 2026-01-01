@@ -10,7 +10,7 @@ class PostController extends Controller
     //記事一覧画面
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return view('posts.index', compact('posts'));
     }
 
