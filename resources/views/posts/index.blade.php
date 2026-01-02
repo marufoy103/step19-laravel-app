@@ -1,7 +1,7 @@
    <x-app-layout>
    <h1 class="text-white text-2xl font-bold">記事一覧</h1>
     <table class="text-white text-2xl font-bold">
-        <thead >
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>タイトル</th>
