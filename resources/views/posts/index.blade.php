@@ -6,6 +6,8 @@
                 <th>ID</th>
                 <th>タイトル</th>
                 <th>内容</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +16,8 @@
                     <td>{{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
+                    <td><a href="{{ route('posts.edit', $post->id) }}">編集</a></td>
+                    <td><a href="{{ route('posts.destroy', $post->id) }}">削除</a></td>
                 </tr>
             @endforeach
         </tbody>
